@@ -1,25 +1,25 @@
-import React from "react"
-import styled from "styled-components"
-import { Spacing, BorderRadius, FontWeight } from "shared/styles/styles"
 import { Images } from "assets/images"
-import { Colors } from "shared/styles/colors"
+import React from "react"
 import { Person, PersonHelper } from "shared/models/person"
+import { Colors } from "shared/styles/colors"
+import { BorderRadius, FontWeight, Spacing } from "shared/styles/styles"
 import { RollStateSwitcher } from "staff-app/components/roll-state/roll-state-switcher.component"
+import styled from "styled-components"
 
 interface Props {
-  isRollMode?: boolean
+  rollMethod?: boolean
   student: Person
 }
-export const StudentListTile: React.FC<Props> = ({ isRollMode, student }) => {
+export const StudentListTile: React.FC<Props> = ({ rollMethod, student }) => {
   return (
     <S.Container>
       <S.Avatar url={Images.avatar}></S.Avatar>
       <S.Content>
         <div>{PersonHelper.getFullName(student)}</div>
       </S.Content>
-      {isRollMode && (
+      {rollMethod && (
         <S.Roll>
-          <RollStateSwitcher />
+          <RollStateSwitcher student={student} />
         </S.Roll>
       )}
     </S.Container>

@@ -1,9 +1,9 @@
-import React from "react"
-import styled from "styled-components"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { BorderRadius } from "shared/styles/styles"
-import { Colors } from "shared/styles/colors"
+import React from "react"
 import { RolllStateType } from "shared/models/roll"
+import { Colors } from "shared/styles/colors"
+import { BorderRadius } from "shared/styles/styles"
+import styled from "styled-components"
 
 interface Props {
   type: RolllStateType

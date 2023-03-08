@@ -1,4 +1,4 @@
-import { getRandomInt, generateRange } from "shared/helpers/math-utils"
+import { generateRange, getRandomInt } from "shared/helpers/math-utils"
 
 const nameTokens = ["Alan", "John", "Brandon", "Key", "Branda", "Morris", "Carlos", "Lee"]
 

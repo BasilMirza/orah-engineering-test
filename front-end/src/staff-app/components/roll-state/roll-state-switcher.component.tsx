@@ -1,14 +1,25 @@
-import React, { useState } from "react"
-import { RolllStateType } from "shared/models/roll"
-import { RollStateIcon } from "staff-app/components/roll-state/roll-state-icon.component"
+import React, { useState } from "react";
+import { connect } from 'react-redux';
+import { Person } from "shared/models/person";
+import { RolllStateType } from "shared/models/roll";
+import { RollStateIcon } from "staff-app/components/roll-state/roll-state-icon.component";
+import * as actions from '../../../actions';
+
+export function mapDispatchToProps(dispatch: any) {
+  return {
+    setAttendanceStatus: (type:string, id:number ):any => dispatch(actions.setAttendanceStatus(type, id)),
+  };
+}
 
 interface Props {
   initialState?: RolllStateType
   size?: number
   onStateChange?: (newState: RolllStateType) => void
+  student: Person
+  setAttendanceStatus?: (type: string, id: number) => void  
 }
-export const RollStateSwitcher: React.FC<Props> = ({ initialState = "unmark", size = 40, onStateChange }) => {
-  const [rollState, setRollState] = useState(initialState)
+ const RollStateSwitch: React.FC<Props> = ({ initialState = "unmark", size = 40, onStateChange,student, setAttendanceStatus }) => {
+  const [rollState, setRollState] = useState(student?.rollState || initialState)
 
   const nextState = () => {
     const states: RolllStateType[] = ["present", "late", "absent"]
@@ -20,6 +31,9 @@ export const RollStateSwitcher: React.FC<Props> = ({ initialState = "unmark", si
   const onClick = () => {
     const next = nextState()
     setRollState(next)
+    if (setAttendanceStatus) {
+      setAttendanceStatus(next, student.id)
+    }
     if (onStateChange) {
       onStateChange(next)
     }
@@ -27,3 +41,6 @@ export const RollStateSwitcher: React.FC<Props> = ({ initialState = "unmark", si
 
   return <RollStateIcon type={rollState} size={size} onClick={onClick} />
 }
+const RollStateSwitcher = connect(null, mapDispatchToProps)(RollStateSwitch);
+
+export { RollStateSwitcher };

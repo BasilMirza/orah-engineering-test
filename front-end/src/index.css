@@ -13,6 +13,25 @@
   font-size: calc(10px + 2vmin);
   color: #fff;
 }
+.arrowIcon {
+  padding-left: 12px;
+}
+
+.toolbarName {
+  cursor: pointer;
+}
+
+.MuiInputBase-root {
+  color: white !important;
+}
+
+.MuiInput-underline::before {
+  border-bottom: 1px solid #d8d8d8 !important;
+}
+
+.MuiInput-underline::after {
+  border-bottom: 1px solid #495786 !important;
+}
 
 .app-header a {
   color: #fff;

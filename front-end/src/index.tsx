@@ -1,9 +1,12 @@
+import "index.css"
 import React from "react"
 import ReactDOM from "react-dom"
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom"
-import "index.css"
-import StaffApp from "staff-app/app"
+import { Provider } from "react-redux"
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom"
+import { createStore } from "redux"
 import { GlobalStyle } from "shared/styles/global-style"
+import StaffApp from "staff-app/app"
+import reducer from "./reducers"
 
 const Home: React.FC = () => {
   return (
@@ -15,16 +18,19 @@ const Home: React.FC = () => {
     </div>
   )
 }
+const store = createStore(reducer)
 
 ReactDOM.render(
   <React.StrictMode>
     <GlobalStyle />
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home>Engineering Test</Home>} />
-        <Route path="staff/*" element={<StaffApp />} />
-      </Routes>
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home>Engineering Test</Home>} />
+          <Route path="staff/*" element={<StaffApp />} />
+        </Routes>
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 )
